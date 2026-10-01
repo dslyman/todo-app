@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <h1 class="app-title">My tasks</h1>
+
+    <!-- Add task form -->
+    <form id="task-form" class="task-form">
+      <label for="task-input" class="visually-hidden">New task</label>
+      <input
+        type="text"
+        id="task-input"
+        class="task-input"
+        placeholder="What needs doing?"
+        autocomplete="off"
+        maxlength="120"
+      >
+      <button type="submit" class="btn btn-primary">Add task</button>
+    </form>
+
+    <!-- Filters -->
+    <div class="filters" role="group" aria-label="Filter tasks">
+      <button type="button" class="filter-btn active" data-filter="all">All</button>
+      <button type="button" class="filter-btn" data-filter="active">Active</button>
+      <button type="button" class="filter-btn" data-filter="completed">Completed</button>
+    </div>
+
+    <!-- Task list -->
+    <ul id="task-list" class="task-list"></ul>
+    <p id="empty-message" class="empty-message" hidden></p>
+
+    <!-- Footer: counter and clear button -->
+    <div class="footer">
+      <span id="task-counter" class="task-counter" aria-live="polite">0 tasks left</span>
+      <button type="button" id="clear-completed" class="btn btn-text">Clear completed</button>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

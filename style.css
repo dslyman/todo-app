@@ -1,0 +1,334 @@
+/* ---------- Design tokens ---------- */
+:root {
+  --bg: #e9efec;
+  --card: #ffffff;
+  --ink: #1d2b2f;
+  --muted: #667a80;
+  --line: #dde6e3;
+  --accent: #1c7a6a;
+  --accent-dark: #155f52;
+  --accent-soft: #e1f1ed;
+  --danger: #b8431a;
+  --danger-soft: #fbe9e2;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(29, 43, 47, 0.08);
+  --speed: 0.2s;
+}
+
+/* Dark theme follows the device setting */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12191b;
+    --card: #1a2427;
+    --ink: #e6efec;
+    --muted: #8da0a5;
+    --line: #2a3a3e;
+    --accent: #3fb59e;
+    --accent-dark: #5cc9b3;
+    --accent-soft: #1f3a37;
+    --danger: #ee8a62;
+    --danger-soft: #3a2620;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* ---------- Base ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 48px 16px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- App card ---------- */
+.app {
+  width: 100%;
+  max-width: 560px;
+  padding: 32px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.app-title {
+  margin: 0 0 24px;
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Add task form ---------- */
+.task-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.task-input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  background: var(--bg);
+  border: 2px solid transparent;
+  border-radius: 10px;
+  transition: border-color var(--speed), background var(--speed);
+}
+
+.task-input::placeholder {
+  color: var(--muted);
+}
+
+.task-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--card);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: background var(--speed), transform var(--speed), color var(--speed);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-text {
+  padding: 6px 10px;
+  background: none;
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.btn-text:hover {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+/* ---------- Filters ---------- */
+.filters {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.filter-btn {
+  padding: 6px 14px;
+  background: none;
+  border: none;
+  border-radius: 999px;
+  color: var(--muted);
+  font-weight: 500;
+  transition: background var(--speed), color var(--speed);
+}
+
+.filter-btn:hover {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.filter-btn.active {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-weight: 600;
+}
+
+/* ---------- Task list ---------- */
+.task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--line);
+  border-radius: 8px;
+  transition: background var(--speed), opacity var(--speed), transform var(--speed);
+}
+
+.task-item:hover {
+  background: var(--bg);
+}
+
+/* Used when a task is being deleted */
+.task-item.removing {
+  opacity: 0;
+  transform: translateX(16px);
+}
+
+/* Custom checkbox */
+.task-check {
+  flex-shrink: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  border: 2px solid var(--muted);
+  border-radius: 50%;
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+  transition: background var(--speed), border-color var(--speed);
+}
+
+.task-check::after {
+  content: "";
+  width: 6px;
+  height: 11px;
+  margin-top: -2px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform var(--speed);
+}
+
+.task-check:hover {
+  border-color: var(--accent);
+}
+
+.task-check:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.task-check:checked::after {
+  transform: rotate(45deg) scale(1);
+}
+
+.task-text {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  transition: color var(--speed);
+}
+
+.task-item.completed .task-text {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.delete-btn {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 1.3rem;
+  line-height: 1;
+  opacity: 0.6;
+  transition: background var(--speed), color var(--speed), opacity var(--speed);
+}
+
+.task-item:hover .delete-btn,
+.delete-btn:focus-visible {
+  opacity: 1;
+}
+
+.delete-btn:hover {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+/* ---------- Empty message ---------- */
+.empty-message {
+  margin: 28px 0;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 480px) {
+  body {
+    padding: 20px 12px;
+  }
+
+  .app {
+    padding: 20px;
+  }
+
+  .app-title {
+    font-size: 1.5rem;
+  }
+
+  .task-form {
+    flex-direction: column;
+  }
+
+  /* Always show the delete button on touch screens (no hover) */
+  .delete-btn {
+    opacity: 1;
+  }
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
